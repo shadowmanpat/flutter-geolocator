@@ -36,7 +36,8 @@ public enum ErrorCodes {
       case locationServicesDisabled:
         return "Location services are disabled. To receive location updates the location services should be enabled.";
       case permissionDefinitionsNotFound:
-        return "No location permissions are defined in the manifest. Make sure at least ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION are defined in the manifest.";
+          //nagas
+        return "Nagas No location permissions are defined in the manifest. Make sure at least ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION are defined in the manifest.";
       case permissionDenied:
         return "User denied permissions to access the device's location.";
       case permissionRequestInProgress:

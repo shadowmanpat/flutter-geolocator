@@ -140,13 +140,16 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
   }
 
   private void onRequestPermission(MethodChannel.Result result) {
+      Log.d("nagas ", "onRequestPermission");
     try {
       permissionManager.requestPermission(
           activity,
           (LocationPermission permission) -> result.success(permission.toInt()),
           (ErrorCodes errorCode) ->
               result.error(errorCode.toString(), errorCode.toDescription(), null));
+
     } catch (PermissionUndefinedException e) {
+        Log.d("nagas PermissionUndefi", String.valueOf(e));
       ErrorCodes errorCode = ErrorCodes.permissionDefinitionsNotFound;
       result.error(errorCode.toString(), errorCode.toDescription(), null);
     }
@@ -158,6 +161,9 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
             context,
             (ErrorCodes errorCode) ->
                 result.error(errorCode.toString(), errorCode.toDescription(), null));
+
+
+      Log.d("nagas status", String.valueOf(status.ordinal()));
     if (result != null) {
       result.success(status.ordinal());
     }

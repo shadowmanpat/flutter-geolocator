@@ -165,7 +165,7 @@ public class PermissionManager
     }
 
     if (grantedResult == PackageManager.PERMISSION_GRANTED) {
-        locationPermission = (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q || hasBackgroundAccess(permissions, grantResults))
+        locationPermission = (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.S || hasBackgroundAccess(permissions, grantResults))
                 ? LocationPermission.always
                 : LocationPermission.whileInUse;
     } else {
@@ -195,11 +195,8 @@ public class PermissionManager
 
   private static List<String> getLocationPermissionsFromManifest(Context context)
       throws PermissionUndefinedException {
-    boolean fineLocationPermissionExists =
-        PermissionUtils.hasPermissionInManifest(context, Manifest.permission.ACCESS_FINE_LOCATION);
-    boolean coarseLocationPermissionExists =
-        PermissionUtils.hasPermissionInManifest(
-            context, Manifest.permission.ACCESS_COARSE_LOCATION);
+    boolean fineLocationPermissionExists = PermissionUtils.hasPermissionInManifest(context, Manifest.permission.ACCESS_FINE_LOCATION);
+    boolean coarseLocationPermissionExists = PermissionUtils.hasPermissionInManifest(context, Manifest.permission.ACCESS_COARSE_LOCATION);
 
     if (!fineLocationPermissionExists && !coarseLocationPermissionExists) {
       throw new PermissionUndefinedException();
@@ -214,13 +211,13 @@ public class PermissionManager
     if (coarseLocationPermissionExists) {
       permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
     }
-
+      Log.d("android permissions", permissions.toString());
     return permissions;
   }
 
     public boolean hasPermission(Context context) throws PermissionUndefinedException {
         LocationPermission locationPermission = this.checkPermissionStatus(context);
-
+        Log.d("android", "locationPermission ");
         return locationPermission == LocationPermission.whileInUse || locationPermission == LocationPermission.always;
     }
 }
